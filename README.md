@@ -9,7 +9,7 @@ The Flask app behind my personal website and hockey analytics portfolio. It ties
 * **Hockey Analytics Blog:** Markdown-based blog posts, checked into the repo (in `content/posts/`) and rendered once into memory at startup, with lazy-loaded WebP images and per-post share images.
 * **NHL Player & Team Cards:** Interactive pages for generating and comparing NHL player and team stat cards on the fly, built on top of my [nhl-player-cards](https://github.com/AveryJD/nhl-player-cards) and [nhl-team-cards](https://github.com/AveryJD/nhl-team-cards) packages, with generated card images cached in memory to keep repeat requests instant.
 * **NHL Schedule Genetic Algorithm:** A dedicated page showcasing the optimized schedules, fitness curves, and hyperparameter tuning results from my [nhl-schedule-genetic-algorithm](https://github.com/AveryJD/nhl-schedule-genetic-algorithm) project.
-* **Methodologies:** A page walking through the methodologies behind the player/team cards (xG, RAPM, WAR, Elo, SRS), built from my [nhl-stats-collection-and-processing](https://github.com/AveryJD/nhl-stats-collection-and-processing) models, plus a hockey analytics glossary.
+* **Methodologies:** A page walking through the methodologies behind the player/team cards (xG, RAPM, WAR, Elo, SRS), built from my [nhl-analytics-pipeline](https://github.com/AveryJD/nhl-analytics-pipeline) models (not currently public, but will be made available soon), plus a hockey analytics glossary.
 * **Profile Pages:** About Me, Education (degree, honours thesis, courses, and awards), Experience (hockey analytics, research, and technical roles), and a CV page with a timeline and downloadable light and dark versions, plus an About Analytics With Avery page, contact information, and social links.
 * **Dark Mode:** Site-wide light/dark theme toggle that persists across visits.
 
@@ -24,7 +24,7 @@ On Render, use `pip install -r requirements.txt && flask --app app init-db` as t
 
 
 ## Acknowledgments
-* NHL data collection and modeling (the xG, RAPM, WAR, Elo, and SRS models behind the methodologies page) come from my [nhl-stats-collection-and-processing](https://github.com/AveryJD/nhl-stats-collection-and-processing) project.
+* NHL data collection and modeling (the xG, RAPM, WAR, Elo, and SRS models behind the methodologies page) come from my [nhl-analytics-pipeline](https://github.com/AveryJD/nhl-analytics-pipeline) project.
 * Player and team card generation, along with their underlying data, come from my [nhl-player-cards](https://github.com/AveryJD/nhl-player-cards) and [nhl-team-cards](https://github.com/AveryJD/nhl-team-cards) packages.
 * Optimized schedule content comes from my [nhl-schedule-genetic-algorithm](https://github.com/AveryJD/nhl-schedule-genetic-algorithm) project.
 
