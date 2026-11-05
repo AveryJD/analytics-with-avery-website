@@ -7,7 +7,7 @@
 {% block title %}Projects | Analytics With Avery{% endblock %}
 {% block meta_description %}Hockey analytics projects by Avery Doiron: NHL player and team stat cards, an NHL schedule optimizer, and an interview language analysis.{% endblock %}
 
-{% block og_image %}https://analyticswithavery.com/static/assets/cards/player_cards/player_preview_card_0_light.webp{% endblock %}
+{% block og_image %}https://analyticswithavery.com/static/assets/cards/skater_preview_0_light.webp{% endblock %}
 
 {% block content %}
   <h1>Projects</h1>
@@ -15,7 +15,8 @@
   <div class="panel">
     <h2>What's on This Page</h2>
     <p>
-      This page displays my hockey analytics projects, including custom NHL player cards, custom NHL team cards, and a genetic algorithm for generating optimized NHL schedules. The code for all of my projects is fully available on my <a href="https://github.com/AveryJD" target="_blank">GitHub</a>.
+      This page displays my hockey analytics projects, including custom NHL player cards, custom NHL team cards, interactive
+      NHL stats and dashboards, and a genetic algorithm for generating optimized NHL schedules. The code for all of my projects is fully available on my <a href="https://github.com/AveryJD" target="_blank">GitHub</a>.
     </p>
 
     <div class="horizontal-buttons horizontal-buttons--left">
@@ -30,8 +31,7 @@
       <h2>NHL Player Cards</h2>
       <p>
         I've created NHL player stat cards that combine advanced analytics, custom models, and clean visuals to highlight player performance.
-        You can explore over 12,300 individual cards of forwards, defensemen, and goalies from the past 17 seasons!
-        The project is mostly complete, but I continue to make occasional improvements to the models and visuals.
+        You can explore over 12,900 individual cards of forwards, defensemen, and goalies from the past 18 seasons!
       </p>
 
       <div class="content-button content-button--left">
@@ -42,9 +42,9 @@
     <div class="project-panel-preview">
       <div class="player-card">
         <img
-          src="{{ url_for('static', filename='assets/cards/player_cards/player_preview_card_0_light.webp') }}"
-          data-light="{{ url_for('static', filename='assets/cards/player_cards/player_preview_card_0_light.webp') }}"
-          data-dark="{{ url_for('static', filename='assets/cards/player_cards/player_preview_card_0_dark.webp') }}"
+          src="{{ url_for('static', filename='assets/cards/skater_preview_0_light.webp') }}"
+          data-light="{{ url_for('static', filename='assets/cards/skater_preview_0_light.webp') }}"
+          data-dark="{{ url_for('static', filename='assets/cards/skater_preview_0_dark.webp') }}"
           alt="Sample NHL player card for Sidney Crosby showing WAR, 5v5 offense/defense, and season trends"
           class="preview-theme-card"
           loading="lazy"
@@ -59,8 +59,7 @@
       <h2>NHL Team Cards</h2>
       <p>
         I've created NHL team stat cards that combine advanced analytics, custom ratings, and clean visuals to highlight team performance.
-        You can explore over 500 team cards from the past 19 seasons! Like my player cards, this project is mostly complete,
-        but updates are occasionally made.
+        You can explore over 550 team cards from the past 18 seasons!
       </p>
 
       <div class="content-button content-button--left">
@@ -71,9 +70,9 @@
     <div class="project-panel-preview">
       <div class="player-card">
         <img
-          src="{{ url_for('static', filename='assets/cards/team_cards/team_preview_card_0_light.webp') }}"
-          data-light="{{ url_for('static', filename='assets/cards/team_cards/team_preview_card_0_light.webp') }}"
-          data-dark="{{ url_for('static', filename='assets/cards/team_cards/team_preview_card_0_dark.webp') }}"
+          src="{{ url_for('static', filename='assets/cards/team_preview_0_light.webp') }}"
+          data-light="{{ url_for('static', filename='assets/cards/team_preview_0_light.webp') }}"
+          data-dark="{{ url_for('static', filename='assets/cards/team_preview_0_dark.webp') }}"
           alt="Sample NHL team card for the Carolina Hurricanes showing standings, 5v5 stats, and Elo rating trends"
           class="preview-theme-card"
           loading="lazy"

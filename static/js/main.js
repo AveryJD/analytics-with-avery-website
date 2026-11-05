@@ -216,16 +216,16 @@ function setupPlayerFilter(suffix) {
     // load event for an unchanged src, so just make sure it's visible.
     if (card.src === new URL(imgSrc, window.location.href).href) {
       if (spinner) spinner.style.display = "none";
-      card.style.display = "block";
+      card.style.visibility = "visible";
       return;
     }
 
-    card.style.display = "none";
+    card.style.visibility = "hidden"; // hidden, not removed, so the frame keeps the old card's size
     if (spinner) spinner.style.display = "flex";
 
     card.onload = () => {
       if (spinner) spinner.style.display = "none";
-      card.style.display = "block";
+      card.style.visibility = "visible";
     };
 
     card.onerror = () => {
@@ -351,16 +351,16 @@ function setupTeamFilter(suffix) {
     // load event for an unchanged src, so just make sure it's visible.
     if (card.src === new URL(imgSrc, window.location.href).href) {
       if (spinner) spinner.style.display = "none";
-      card.style.display = "block";
+      card.style.visibility = "visible";
       return;
     }
 
-    card.style.display = "none";
+    card.style.visibility = "hidden"; // hidden, not removed, so the frame keeps the old card's size
     if (spinner) spinner.style.display = "flex";
 
     card.onload = () => {
       if (spinner) spinner.style.display = "none";
-      card.style.display = "block";
+      card.style.visibility = "visible";
     };
 
     card.onerror = () => {

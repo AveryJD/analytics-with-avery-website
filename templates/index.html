@@ -14,9 +14,9 @@
   <div class="card-preview">
     {%- for name in cards %}
     <img
-      src="{{ url_for('static', filename='assets/cards/' ~ kind ~ '_cards/' ~ kind ~ '_preview_card_' ~ loop.index ~ '_light.webp') }}"
-      data-light="{{ url_for('static', filename='assets/cards/' ~ kind ~ '_cards/' ~ kind ~ '_preview_card_' ~ loop.index ~ '_light.webp') }}"
-      data-dark="{{ url_for('static', filename='assets/cards/' ~ kind ~ '_cards/' ~ kind ~ '_preview_card_' ~ loop.index ~ '_dark.webp') }}"
+      src="{{ url_for('static', filename='assets/cards/' ~ ('skater' if kind == 'player' else kind) ~ '_preview_' ~ loop.index ~ '_light.webp') }}"
+      data-light="{{ url_for('static', filename='assets/cards/' ~ ('skater' if kind == 'player' else kind) ~ '_preview_' ~ loop.index ~ '_light.webp') }}"
+      data-dark="{{ url_for('static', filename='assets/cards/' ~ ('skater' if kind == 'player' else kind) ~ '_preview_' ~ loop.index ~ '_dark.webp') }}"
       alt="Sample NHL {{ kind }} card for {{ name }}"
       class="player-card preview-theme-card"
       loading="lazy"

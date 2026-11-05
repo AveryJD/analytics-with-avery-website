@@ -19,10 +19,9 @@
   grid-area: 1 / 1;
   width: var(--card-w);
   min-width: 0;
+  min-height: 0; /* the spinner's minimum height on .player-card must not stretch a preview */
   max-width: none;
   margin: 0;
-  padding: calc(var(--card-w) * var(--card-border-ratio));
-  object-fit: contain;
 }
 
 .card-preview img:nth-child(1) { transform: translateX(-24cqw) translateY(1.1cqw) rotate(-8deg); z-index: 1; }
@@ -133,32 +132,17 @@
 
 .player-card {
   position: relative;
-  display: block;
-  align-content: center;
   margin: 2rem auto;
-  max-width: min(40rem, calc((100vh - var(--nav-height) - 4rem) * 5 / 6));
+  max-width: min(40rem, calc((100vh - var(--nav-height) - 4rem) * 4 / 5));
+  min-height: 16rem; /* room for the loading spinner before the image arrives */
   overflow: hidden;
-  border-radius: var(--main-radius);
-  aspect-ratio: 5 / 6;
-  background-color: var(--bg-card);
-}
-
-.player-card a,
-.card-loading-spinner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   border-radius: var(--main-radius);
 }
 
 .player-card img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: var(--main-radius);
-  padding: calc(var(--card-border-ratio) * 100%);
+  height: auto;
 }
 
 @media (max-width: 1200px) {
