@@ -255,7 +255,7 @@
         The NHL records a shot at the spot where the shooter was when it happened, so a wrap-around shot, which starts behind the net and ends 
         up on the goalie from close range, is logged as a shot from behind the net, and the model rates those shots highly. Few shots are taken 
         from back there, so a handful of goals can also make a spot look better than it is. In reality these shots score far less often than the 
-        model expects: across the out-of-sample seasons, 5v5 shots from behind the net scored about 430 goals against about 660 expected.
+        model expects: across the out-of-sample seasons, 5v5 shots from behind the net scored about 430 goals against about 670 expected.
       </p>
 
       <h3 id="xg-results">Model Performance</h3>
@@ -333,7 +333,7 @@
         <li>Penalty shots use a fixed value (per season) that doesn't vary by shooter, goalie, or the actual shot taken.</li>
         <li>The prior miss reason changed in 2023-2024. It carries more detail in recent seasons than in older ones (see the features above).</li>
         <li>The first five seasons are in-sample. Their xG, and anything built on it, is flattered a little, so treat 2009-2010 through 2013-2014 as a bit more descriptive than predictive.</li>
-        <li>Some NHL data is missing. Five games have no or partial shift data, so they are missing from, or only partly counted in, the on-ice stats, RAPM and WAR, though their shots and goals still count in individual stats. Three are in 2009-2010 and have none (PIT at CAR on 2009-10-14, NYI at DAL on 2010-01-08, and SJS at CBJ on 2010-02-10), one is in 2010-2011 and has about half (WSH at CAR on 2010-10-27), and one is in 2013-2014 and has none (CBJ at DAL on 2014-04-09). In 2009-2010, 2,161 shots (about 2.1% of the season's shots) have no strength state because of gaps in the shift data: 256 are from the three games above and the rest are spread over about 290 other games. They count in the all-situations stats but not in the 5v5, 5v4 or 4v5 splits, and the xG model scores them with its catch-all other even strength model, so that season's xG is less reliable. One game in 2009-2010 (TBL at FLA on 2010-01-16) has no faceoff data.</li>
+        <li>Some NHL data is missing. Four games have no or partial shift data, so they are missing from, or only partly counted in, the on-ice stats, RAPM and WAR, though their shots and goals still count in individual stats. Three are in 2009-2010 and have none (PIT at CAR on 2009-10-14, NYI at DAL on 2010-01-08, and SJS at CBJ on 2010-02-10), one is in 2010-2011 and has about half (WSH at CAR on 2010-10-27). In 2009-2010, 256 shots (about 0.25% of the season's shots) from the three games above have no strength state. They count in the all-situations stats but not in the 5v5, 5v4 or 4v5 splits, and the xG model scores them with its catch-all other even strength model, so that season's xG is slightly less reliable. One game in 2009-2010 (TBL at FLA on 2010-01-16) has no faceoff data.</li>
       </ul>
 
       </div>
