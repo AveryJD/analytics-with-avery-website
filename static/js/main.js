@@ -67,31 +67,6 @@ function updatePreviewThemeCards() {
   });
 }
 
-function whenTwitterWidgetsReady(callback, attemptsLeft = 50) {
-  if (window.twttr && window.twttr.widgets) {
-    callback();
-    return;
-  }
-
-  if (attemptsLeft <= 0) return;
-
-  setTimeout(() => whenTwitterWidgetsReady(callback, attemptsLeft - 1), 100);
-}
-
-// Re-render the embedded X/Twitter post using the site's current light/dark theme.
-function renderTweetEmbed(theme) {
-  const container = document.getElementById("x-tweet-embed");
-  if (!container) return;
-
-  const tweetId = container.dataset.tweetId;
-  if (!tweetId) return;
-
-  whenTwitterWidgetsReady(() => {
-    container.innerHTML = "";
-    twttr.widgets.createTweet(tweetId, container, { theme, dnt: true });
-  });
-}
-
 // ----- Card pickers: a season's teams and players are fetched once from the site (so the page itself stays small) and shared by every picker on the page -----
 const cardSeasonData = new Map();
 
@@ -518,7 +493,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     updatePreviewThemeCards();
-    renderTweetEmbed(theme);
   }
 
   const savedTheme = localStorage.getItem("theme");
