@@ -5,7 +5,6 @@
 @media (max-width: 860px) {
   .project-grid,
   .home-split,
-  .social-grid,
   .project-panel {
     grid-template-columns: 1fr;
   }
