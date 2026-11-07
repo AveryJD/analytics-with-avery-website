@@ -397,7 +397,7 @@ const PRELOAD_CARDS = {
 };
 
 const PRELOAD_TEAM_CARDS = {
-  0: { season: "2025-2026", team: "Buffalo Sabres" },
+  0: { season: "2025-2026", team: "Carolina Hurricanes" },
   1: { season: "2025-2026", team: "Toronto Maple Leafs" },
   2: { season: "2025-2026", team: "Montreal Canadiens" }
 };
