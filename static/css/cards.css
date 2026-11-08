@@ -139,6 +139,12 @@
   border-radius: var(--main-radius);
 }
 
+/* On the card pages the frame is always the size of a card (cards are 4:5), so the loading spinner sits in a card-sized box */
+.filter-form .player-card {
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+}
+
 .player-card img {
   display: block;
   width: 100%;
