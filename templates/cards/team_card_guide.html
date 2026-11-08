@@ -2,155 +2,185 @@
     <details class="model-details">
       <summary><h2>Team Card Guide</h2></summary>
       <div class="model-body">
-
-          <p>
-              Each ranking shows the team's rank for that attribute (large number, left), the total number of teams (small number,
-              bottom), and a percentile bar showing how many teams they rank above (bar on the right).
-          </p>
-          <p>
-              Data includes all games played up to and including September 1, 2026, and is sourced from the NHL API.
-              NHL team logos are the property of the NHL and its teams.
-          </p>
-
-          <div class="glossary-category">
-              <h3>Standings</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Record</h4>
-                      <p>The team's record (wins-losses-overtime/shootout losses).</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Points %</h4>
-                      <p>The percentage of available points earned by the team.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Points</h4>
-                      <p>Total standings points earned by the team.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Goal Differential</h4>
-                      <p>The difference between goals scored and goals allowed (including goals awarded for shootout wins).</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Division Rank</h4>
-                      <p>The team's rank within its division.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Conference Rank</h4>
-                      <p>The team's rank within its conference.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>League Rank</h4>
-                      <p>The team's overall rank across the league.</p>
-                  </div>
-              </div>
+        <div class="guide-card" id="team-guide-card" data-guide-card>
+          <div class="guide-card-figure">
+            <div class="guide-card-stage">
+              <img class="guide-card-img guide-card-img-light" src="{{ url_for('static', filename='assets/cards/team_guide_light.webp') }}" alt="Example team card guide for the Vegas Golden Knights" width="2000" height="2500" loading="lazy">
+              <img class="guide-card-img guide-card-img-dark" src="{{ url_for('static', filename='assets/cards/team_guide_dark.webp') }}" alt="" aria-hidden="true" width="2000" height="2500" loading="lazy">
+              {# Standings #}
+              <span class="guide-card-box" data-spot-box="1" style="left: 36.38%; top: 7%; width: 27.25%; height: 16.8%;"></span>
+              {# Season Stats #}
+              <span class="guide-card-box" data-spot-box="2" style="left: 67.69%; top: 7%; width: 27.25%; height: 16.8%;"></span>
+              {# Elo Rating #}
+              <span class="guide-card-box" data-spot-box="3" style="left: 4.19%; top: 30.2%; width: 44%; height: 22.85%;"></span>
+              {# SRS Ranking #}
+              <span class="guide-card-box" data-spot-box="4" style="left: 52.31%; top: 30.2%; width: 44%; height: 22.85%;"></span>
+              {# xGoals For #}
+              <span class="guide-card-box" data-spot-box="5" style="left: 5.44%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+              {# Goals For #}
+              <span class="guide-card-box" data-spot-box="6" style="left: 5.44%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+              {# Shots For #}
+              <span class="guide-card-box" data-spot-box="7" style="left: 5.44%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+              {# Shooting % #}
+              <span class="guide-card-box" data-spot-box="8" style="left: 5.44%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+              {# Penalties Drawn #}
+              <span class="guide-card-box" data-spot-box="9" style="left: 5.44%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+              {# xGoals Against #}
+              <span class="guide-card-box" data-spot-box="10" style="left: 37.31%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+              {# Goals Against #}
+              <span class="guide-card-box" data-spot-box="11" style="left: 37.31%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+              {# Shots Against #}
+              <span class="guide-card-box" data-spot-box="12" style="left: 37.31%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+              {# Save % #}
+              <span class="guide-card-box" data-spot-box="13" style="left: 37.31%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+              {# Penalties Taken #}
+              <span class="guide-card-box" data-spot-box="14" style="left: 37.31%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+              {# 5v4 xGoals For #}
+              <span class="guide-card-box" data-spot-box="15" style="left: 69.19%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+              {# 5v4 Goals For #}
+              <span class="guide-card-box" data-spot-box="16" style="left: 69.19%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+              {# 4v5 xGoals Against #}
+              <span class="guide-card-box" data-spot-box="17" style="left: 69.19%; top: 78.25%; width: 25.69%; height: 5.95%;"></span>
+              {# 4v5 Goals Against #}
+              <span class="guide-card-box" data-spot-box="18" style="left: 69.19%; top: 84.6%; width: 25.69%; height: 5.95%;"></span>
+            </div>
           </div>
-
-          <div class="glossary-category">
-              <h3>5v5 Stats</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Goals For %</h4>
-                      <p>The percentage of total goals scored by the team at 5v5.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>xGoals For %</h4>
-                      <p>The percentage of expected goals generated by the team at 5v5.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Shots For %</h4>
-                      <p>The percentage of total shots taken by the team at 5v5.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Corsi For %</h4>
-                      <p>The percentage of shot attempts (shots + missed + blocked) taken by the team at 5v5.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Fenwick For %</h4>
-                      <p>The percentage of unblocked shot attempts (shots + missed) taken by the team at 5v5.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Shooting %</h4>
-                      <p>The team's shooting percentage at 5v5 (goals divided by shots).</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Save Percentage</h4>
-                      <p>The team's save percentage at 5v5 (saves divided by shots).</p>
-                  </div>
+          <div class="guide-card-side">
+            <div class="guide-card-panel" aria-live="polite">
+              <div class="guide-card-note" data-spot-note="0">
+                <h3>Learn More About Each Section</h3>
+                <p>Hover over or click/tap any part of the card to see what it means.</p>
               </div>
-          </div>
-
-          <div class="glossary-category">
-              <h3>Elo Graph</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Elo Rating</h4>
-                      <p>
-                          The team's Elo rating over time: a game-by-game rating that rises or falls after each result, with higher values indicating stronger performance
-                          at that point in the season. See the <a href="/methodologies#elo-model">Elo ratings</a> write-up on my methodologies page.
-                      </p>
-                  </div>
+              <div class="guide-card-note" data-spot-note="1">
+                <h3>Standings</h3>
+                <p>
+                  The team's standing placement for the given season. Their record (wins-losses-overtime/shootout losses), standing points, point
+                  percentage (points earned divided by points available), their rank in their division, and their rank league wide.
+                </p>
               </div>
-          </div>
-
-          <div class="glossary-category">
-              <h3>SRS Graph</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>SRS Rank</h4>
-                      <p>
-                          The team's Simple Rating System (SRS) rank over the past 5 seasons: a season-long strength rating converted into a league-wide rank for
-                          visualization. See the <a href="/methodologies#srs-model">SRS model</a> write-up on my methodologies page.
-                      </p>
-                  </div>
+              <div class="guide-card-note" data-spot-note="2">
+                <h3>Season Stats</h3>
+                <p>
+                  Stats from the given season only, in all situations. The team's goals and expected goals for and against per game (GF/GP, GA/GP, xGF/GP,
+                  xGA/GP), and its 5v5 expected goal share (xGF%, the share of 5v5 expected goals the team created).
+                </p>
               </div>
-          </div>
-
-          <div class="glossary-category">
-              <h3>Team Rankings</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>xGoals For</h4>
-                      <p>The team's expected goals generated in all situations, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>xGoals Against</h4>
-                      <p>The team's expected goals allowed in all situations, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Goals For</h4>
-                      <p>The team's goals scored in all situations, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Goals Against</h4>
-                      <p>The team's goals allowed in all situations, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Power Play</h4>
-                      <p>The team's goal-scoring performance at 5v4, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Penalty Kill</h4>
-                      <p>The team's defensive performance at 4v5, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Shots For</h4>
-                      <p>The team's shots generated in all situations, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Shots Against</h4>
-                      <p>The team's shots allowed in all situations, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Finishing</h4>
-                      <p>The team's ability to convert chances into goals, measured using goals above expected, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Goaltending</h4>
-                      <p>The team's goaltending performance, measured using goals saved above expected, adjusted to a per game rate.</p>
-                  </div>
+              <div class="guide-card-note" data-spot-note="3">
+                <h3>Elo Rating</h3>
+                <p>
+                  The team's Elo rating after each game of the season. The rating updates after every game based on how the result compared to what was
+                  expected. To see how Elo is calculated, check out the <a href="/methodologies#elo-model">methodologies page</a>.
+                </p>
               </div>
+              <div class="guide-card-note" data-spot-note="4">
+                <h3>SRS Ranking</h3>
+                <p>
+                  The team's league rank in the Simple Rating System (SRS) in each of the last five seasons. SRS rates a team by how many goals per game
+                  better or worse than an average team it was, adjusted for the opponents it played and for home ice. To see how SRS is calculated, check
+                  out the <a href="/methodologies#srs-model">methodologies page</a>.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="5">
+                <h3>xGoals For</h3>
+                <p>
+                  The team's expected goals for (xGF) at 5v5, rated per 60 minutes and for the given season only (not weighted). It's the team's total
+                  chance of scoring on their own unblocked shot attempts, based on where and how each was taken, measuring the quality of their shots. To
+                  see how xG is calculated, check out the <a href="/methodologies">methodologies page</a>.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="6">
+                <h3>Goals For</h3>
+                <p>The team's goals scored at 5v5, rated per 60 minutes and for the given season only (not weighted).</p>
+              </div>
+              <div class="guide-card-note" data-spot-note="7">
+                <h3>Shots For</h3>
+                <p>
+                  The team's shots on goal at 5v5, rated per 60 minutes and for the given season only (not weighted). Shots on goal include goals and
+                  saved shots, but not missed shots or blocked shots.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="8">
+                <h3>Shooting %</h3>
+                <p>
+                  The team's shooting percentage (SH%) at 5v5 for the given season only (not weighted). Shooting percentage is calculated as goals divided
+                  by shots on goal.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="9">
+                <h3>Penalties Drawn</h3>
+                <p>
+                  The minor and major penalties the other team took at 5v5 against this team (misconducts are not counted), which give this team a power
+                  play, rated per 60 minutes and for the given season only (not weighted).
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="10">
+                <h3>xGoals Against</h3>
+                <p>
+                  The team's expected goals against (xGA) at 5v5, rated per 60 minutes and for the given season only (not weighted). It's the total chance
+                  of scoring on the unblocked shot attempts the team allowed, measuring the quality of the shots they allowed. To see how xG is
+                  calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="11">
+                <h3>Goals Against</h3>
+                <p>The team's goals allowed at 5v5, rated per 60 minutes and for the given season only (not weighted).</p>
+              </div>
+              <div class="guide-card-note" data-spot-note="12">
+                <h3>Shots Against</h3>
+                <p>The team's shots on goal allowed at 5v5, rated per 60 minutes and for the given season only (not weighted).</p>
+              </div>
+              <div class="guide-card-note" data-spot-note="13">
+                <h3>Save %</h3>
+                <p>
+                  The team's save percentage (SV%) at 5v5 for the given season only (not weighted). Save percentage is calculated as saves divided by
+                  shots on goal.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="14">
+                <h3>Penalties Taken</h3>
+                <p>
+                  The minor and major penalties the team took at 5v5 (misconducts are not counted), which give the other team a power play, rated per 60
+                  minutes and for the given season only (not weighted).
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="15">
+                <h3>5v4 xGoals For</h3>
+                <p>
+                  The team's expected goals for (xGF) on the power play, rated per 2 minutes of 5v4 time for the given season only (not weighted). To see
+                  how xG is calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="16">
+                <h3>5v4 Goals For</h3>
+                <p>The team's power play goals scored, rated per 2 minutes of 5v4 time for the given season only (not weighted).</p>
+              </div>
+              <div class="guide-card-note" data-spot-note="17">
+                <h3>4v5 xGoals Against</h3>
+                <p>
+                  The team's expected goals against (xGA) on the penalty kill, rated per 2 minutes of 4v5 time for the given season only (not weighted).
+                  To see how xG is calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>.
+                </p>
+              </div>
+              <div class="guide-card-note" data-spot-note="18">
+                <h3>4v5 Goals Against</h3>
+                <p>The team's goals allowed on the penalty kill, rated per 2 minutes of 4v5 time for the given season only (not weighted).</p>
+              </div>
+            </div>
+            <div class="percentile-guide">
+              <h3>How to Read a Percentile Bar</h3>
+              <p class="percentile-guide-lead">
+                Every stat has a name (the text on the left), the team's value (the number on the right), and a percentile bar. The percentile bar shows
+                how the team ranks among all teams that season. The number on the bar is the percentile, which is the percentage of teams that the team
+                ranks higher than. Stats where less is better, such as goals against, are flipped so a high percentile is always good.
+              </p>
+              <div class="percentile-guide-example">
+                <img class="percentile-guide-img percentile-guide-img-light" src="{{ url_for('static', filename='assets/cards/team_percentile_guide_light.webp') }}" alt="An example stat from a card: the stat name and its value above a percentile bar filled up to the percentile" width="528" height="167" loading="lazy">
+                <img class="percentile-guide-img percentile-guide-img-dark" src="{{ url_for('static', filename='assets/cards/team_percentile_guide_dark.webp') }}" alt="" aria-hidden="true" width="528" height="167" loading="lazy">
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </details>
   </div>
+  <script src="{{ url_for('static', filename='js/guide_card.js') }}" defer></script>

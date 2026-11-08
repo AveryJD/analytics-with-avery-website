@@ -2,272 +2,502 @@
     <details class="model-details">
       <summary><h2>Player Card Guide</h2></summary>
       <div class="model-body">
-
-          <p>
-              ES Offense, ES Defense, PP Offense, and PK Defense are calculated with a 
-              <a href="/methodologies#war-model">wins above replacement</a> (WAR) model, which converts each skater's on-ice impact, 
-              isolated using a ridge-regression model known as <a href="/methodologies#rapm-model">regularized adjusted plus-minus</a> (RAPM), 
-              into a wins-denominated scale. Finishing and Penalties are also converted to a WAR scale. Finishing is goals scored above 
-              expected on a player's own shots, measured against what a replacement-level shooter would score, and Penalties is net 
-              penalty minutes drawn versus taken, valued by their <a href="/methodologies#xg-model">expected goals</a> worth. Along with power play defense and penalty kill offense, which are not shown on the card, 
-              these eight components are added together, with no extra weighting or rescaling, to give a player's Total WAR.
-          </p>
-          <p>
-              Each ranking shows the player's rank (large number, left), the qualifying player pool size (small number, bottom), and a
-              percentile bar showing how many players they rank above. Graphs plot yearly percentiles rather than the weighted average,
-              to highlight season-to-season change. To qualify, skaters need a pace of 300 minutes TOI over an 82 game season, 
-              and goalies need a pace of 13 games over an 82 game season (15% of games). Attributes shown on the cards are weighted over 
-              the past 3 seasons, with bigger weights going to the more recent seasons.
-          </p>
-          <p>
-              Data includes all games played up to and including September 1, 2026, and is sourced from the NHL API. NHL team logos and
-              player images used are the property of the NHL and its teams.
-          </p>
-          <p>The explanations below are split into skater cards (forwards and defensemen) and goalie cards.</p>
- 
-          <div id="skater-explanation">
- 
-          <div class="glossary-category">
-              <h3>Skater Information and Stats</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Position</h4>
-                      <p>The skater's position as well as their handedness.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Role</h4>
-                      <p>The skater's role on their team based on time on ice.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Age</h4>
-                      <p>The skater's age as of September 1 of the selected season as well as their date of birth.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Size</h4>
-                      <p>The skater's height (in feet and inches) and weight (in pounds).</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Games</h4>
-                      <p>The skater's number of games played.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>G-A-P</h4>
-                      <p>The skater's goals, assists, and points in all situations.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>xG</h4>
-                      <p>The skater's expected goals in all situations.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>5v5 xGF %</h4>
-                      <p>The skater's 5v5 expected goals share (the percentage of expected goals the player's team scores versus concedes while the player is on the ice).</p>
-                  </div>
+        <div class="guide-card-tabs" role="tablist" aria-label="Example card type">
+          <button type="button" class="guide-card-tab" role="tab" aria-selected="true" data-card-tab="skater-guide">Skater</button>
+          <button type="button" class="guide-card-tab" role="tab" aria-selected="false" data-card-tab="goalie-guide">Goalie</button>
+        </div>
+        <div class="guide-card-tab-stack">
+          <div id="skater-guide" data-card-tab-panel>
+            <div class="guide-card" id="skater-guide-card" data-guide-card>
+              <div class="guide-card-figure">
+                <div class="guide-card-stage">
+                  <img class="guide-card-img guide-card-img-light" src="{{ url_for('static', filename='assets/cards/skater_guide_light.webp') }}" alt="Example skater card guide for Sidney Crosby" width="2000" height="2500" loading="lazy">
+                  <img class="guide-card-img guide-card-img-dark" src="{{ url_for('static', filename='assets/cards/skater_guide_dark.webp') }}" alt="" aria-hidden="true" width="2000" height="2500" loading="lazy">
+                  {# Profile #}
+                  <span class="guide-card-box" data-spot-box="1" style="left: 36.38%; top: 7%; width: 27.25%; height: 16.8%;"></span>
+                  {# Season Stats #}
+                  <span class="guide-card-box" data-spot-box="2" style="left: 67.69%; top: 7%; width: 27.25%; height: 16.8%;"></span>
+                  {# Overall WAR #}
+                  <span class="guide-card-box" data-spot-box="3" style="left: 5.44%; top: 28.35%; width: 42.25%; height: 25.05%;"></span>
+                  {# ES Offense #}
+                  <span class="guide-card-box" data-spot-box="4" style="left: 51.19%; top: 25.35%; width: 20.06%; height: 9.35%;"></span>
+                  {# ES Defense #}
+                  <span class="guide-card-box" data-spot-box="5" style="left: 73.75%; top: 25.35%; width: 20.06%; height: 9.35%;"></span>
+                  {# Power Play #}
+                  <span class="guide-card-box" data-spot-box="6" style="left: 51.19%; top: 34.95%; width: 20.06%; height: 9.2%;"></span>
+                  {# Penalty Kill #}
+                  <span class="guide-card-box" data-spot-box="7" style="left: 73.75%; top: 34.95%; width: 20.06%; height: 9.2%;"></span>
+                  {# Finishing #}
+                  <span class="guide-card-box" data-spot-box="8" style="left: 51.19%; top: 44.5%; width: 20.06%; height: 9%;"></span>
+                  {# Penalties #}
+                  <span class="guide-card-box" data-spot-box="9" style="left: 73.75%; top: 44.5%; width: 20.06%; height: 9%;"></span>
+                  {# xGoals #}
+                  <span class="guide-card-box" data-spot-box="10" style="left: 5.44%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+                  {# Goals #}
+                  <span class="guide-card-box" data-spot-box="11" style="left: 5.44%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+                  {# Shots #}
+                  <span class="guide-card-box" data-spot-box="12" style="left: 5.44%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+                  {# Primary Assists #}
+                  <span class="guide-card-box" data-spot-box="13" style="left: 5.44%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+                  {# Hits #}
+                  <span class="guide-card-box" data-spot-box="14" style="left: 5.44%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+                  {# xGoal Share #}
+                  <span class="guide-card-box" data-spot-box="15" style="left: 37.31%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+                  {# Goal Share #}
+                  <span class="guide-card-box" data-spot-box="16" style="left: 37.31%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+                  {# Shot Share #}
+                  <span class="guide-card-box" data-spot-box="17" style="left: 37.31%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+                  {# Shooting % #}
+                  <span class="guide-card-box" data-spot-box="18" style="left: 37.31%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+                  {# Save % #}
+                  <span class="guide-card-box" data-spot-box="19" style="left: 37.31%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+                  {# 5v5 Teammates #}
+                  <span class="guide-card-box" data-spot-box="20" style="left: 69.19%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+                  {# 5v5 Opponents #}
+                  <span class="guide-card-box" data-spot-box="21" style="left: 69.19%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+                  {# 5v5 Ice Time #}
+                  <span class="guide-card-box" data-spot-box="22" style="left: 69.19%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+                  {# 5v4 Ice Time #}
+                  <span class="guide-card-box" data-spot-box="23" style="left: 69.19%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+                  {# 4v5 Ice Time #}
+                  <span class="guide-card-box" data-spot-box="24" style="left: 69.19%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+                </div>
               </div>
-          </div>
- 
-          <div class="glossary-category">
-              <h3>Skater Rankings</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Total WAR</h4>
-                      <p>The skater's total Wins Above Replacement (WAR), a statistic that estimates how many wins a player contributes compared to a replacement-level player, adjusted to a per game rate.</p>
+              <div class="guide-card-side">
+                <div class="guide-card-panel" aria-live="polite">
+                  <div class="guide-card-note" data-spot-note="0">
+                    <h3>Learn More About Each Section</h3>
+                    <p>Hover over or click/tap any part of the card to see what it means.</p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>ES Offense</h4>
-                      <p>The skater's even strength (ES) offensive WAR, pooling 5v5 with 4v4 and 3v3 play, a statistic that estimates how many wins a player contributes offensively compared to a replacement-level player, adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="1">
+                    <h3>Profile</h3>
+                    <p>
+                      Information about who the player is. The position they play and their handedness, their age (on September 1 of the given season's first
+                      year) and their birthday, their height (in feet and inches) and weight (in pounds), their draft position and year (or Undrafted), and
+                      birth country.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>ES Defense</h4>
-                      <p>The skater's even strength (ES) defensive WAR, pooling 5v5 with 4v4 and 3v3 play, a statistic that estimates how many wins a player contributes defensively compared to a replacement-level player, adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="2">
+                    <h3>Season Stats</h3>
+                    <p>
+                      The player's stats from the given season only, in all situations (not weighted). Their games played (GP), ice time per game (TOI/GP),
+                      goals-assists-points, individual expected goals (xG), and wins above replacement (WAR). These are different from the weighted numbers
+                      below.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>PP Offense</h4>
-                      <p>The skater's power play (PP) offensive WAR, pooling 5v4 with 5v3 and 4v3 play, adjusted to a per game rate. Requires averaging over 45 seconds of 5v4 ice time per game.</p>
+                  <div class="guide-card-note" data-spot-note="3">
+                    <h3>Overall WAR</h3>
+                    <p>
+                      The player's total wins above replacement (WAR), for all situations, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over
+                      the past 3 seasons. It is the sum of the six components on the right. The graph below is the overall WAR percentile in each of the last
+                      five seasons, using that season alone (not weighted), with the logos showing the team(s) the player played for. A season without a dot
+                      means the player did not qualify. To see how xG, RAPM, and WAR are calculated, check out the <a href="/methodologies">methodologies
+                      page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>PK Defense</h4>
-                      <p>The skater's penalty kill (PK) defensive WAR, pooling 4v5 with 3v5 and 3v4 play, adjusted to a per game rate. Requires averaging over 45 seconds of 4v5 ice time per game.</p>
+                  <div class="guide-card-note" data-spot-note="4">
+                    <h3>ES Offense</h3>
+                    <p>
+                      The player's even strength (5v5, 4v4, and 3v3) offensive WAR, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the
+                      past 3 seasons. It's the player's impact on their team's expected goals for, adjusted for teammates and opponents using regularized
+                      adjusted plus-minus (RAPM). The small graph under it is the player's Even Strength Offense WAR percentile in each of the last five
+                      seasons (with the same y-axis grid lines as Overall WAR). To see how xG, RAPM, and WAR are calculated, check out the
+                      <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Finishing</h4>
-                      <p>The skater's finishing WAR (across all strengths), their goals scored above their own expected goals on the shots they took, measured against a replacement-level shooter, adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="5">
+                    <h3>ES Defense</h3>
+                    <p>
+                      The player's even strength (5v5, 4v4, and 3v3) defensive WAR, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the
+                      past 3 seasons. It's the player's impact on their team's expected goals against, adjusted for teammates and opponents using regularized
+                      adjusted plus-minus (RAPM). The small graph under it is the player's Even Strength Defense WAR percentile in each of the last five
+                      seasons (with the same y-axis grid lines as Overall WAR). To see how xG, RAPM, and WAR are calculated, check out the
+                      <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Penalties</h4>
-                      <p>The skater's penalty WAR (across all strengths), how good they are at drawing penalties versus taking penalties, valued by their expected goals worth, adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="6">
+                    <h3>Power Play</h3>
+                    <p>
+                      The player's power play (5v4, 5v3, 4v3, etc.) WAR, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3
+                      seasons. It's the player's impact on their team's expected goals for and against while on the power play, adjusted for teammates and
+                      opponents using regularized adjusted plus-minus (RAPM). Players without enough power play ice time (an average of 45 seconds per game
+                      played) do not qualify for a percentile, but still have a value. The small graph under it is the player's Power Play WAR percentile in
+                      each of the last five seasons (with the same y-axis grid lines as Overall WAR). To see how xG, RAPM, and WAR are calculated, check out
+                      the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Goals</h4>
-                      <p>The skater's 5v5 goal-scoring, adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="7">
+                    <h3>Penalty Kill</h3>
+                    <p>
+                      The player's penalty kill (4v5, 3v5, 3v4, etc.) WAR, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3
+                      seasons. It's the player's impact on their team's expected goals for and against while on the penalty kill, adjusted for teammates and
+                      opponents using regularized adjusted plus-minus (RAPM). Players without enough penalty kill ice time (an average of 45 seconds per game
+                      played) do not qualify for a percentile, but still have a value. The small graph under it is the player's Penalty Kill WAR percentile in
+                      each of the last five seasons (with the same y-axis grid lines as Overall WAR). To see how xG, RAPM, and WAR are calculated, check out
+                      the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>xGoals</h4>
-                      <p>The skater's 5v5 individual expected goals, adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="8">
+                    <h3>Finishing</h3>
+                    <p>
+                      The player's finishing WAR, for all situations, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons.
+                      It's the player's goals scored above their expected goals (xG) on their own shots, compared with a replacement-level shooter. The small
+                      graph under it is the player's Finishing WAR percentile in each of the last five seasons (with the same y-axis grid lines as Overall
+                      WAR). To see how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Assists</h4>
-                      <p>The skater's 5v5 assists (weighted toward primary assists), adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="9">
+                    <h3>Penalties</h3>
+                    <p>
+                      The player's penalties WAR, for all situations, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons.
+                      It's the net penalty minutes the player drew versus took, valued by the expected goals those penalties are worth. The small graph under
+                      it is the player's Penalties WAR percentile in each of the last five seasons (with the same y-axis grid lines as Overall WAR). To see
+                      how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Physicality</h4>
-                      <p>The skater's 5v5 physical play (hits delivered, plus hits taken at half weight), adjusted to a per game rate.</p>
+                  <div class="guide-card-note" data-spot-note="10">
+                    <h3>xGoals</h3>
+                    <p>
+                      The player's expected goals (xG) at 5v5, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons. It's
+                      the player's total chance of scoring on their own unblocked shot attempts, based on where and how each was taken, measuring the quality
+                      of their shots. To see how xG is calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Teammates</h4>
-                      <p>How good the skater's teammates were on average at 5v5, weighted by shared 5v5 ice time (deployment context, not a skill rating).</p>
+                  <div class="guide-card-note" data-spot-note="11">
+                    <h3>Goals</h3>
+                    <p>The player's goals scored at 5v5, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons.</p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Competition</h4>
-                      <p>How good the skater's opponents were on average at 5v5, weighted by shared 5v5 ice time (deployment context, not a skill rating).</p>
+                  <div class="guide-card-note" data-spot-note="12">
+                    <h3>Shots</h3>
+                    <p>
+                      The player's shots on goal at 5v5, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons. Shots on goal
+                      include goals and saved shots, but not missed shots or blocked shots.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>O-Zone Starts</h4>
-                      <p>The frequency of a skater's 5v5 shifts starting in the offensive zone (deployment context, not a skill rating).</p>
+                  <div class="guide-card-note" data-spot-note="13">
+                    <h3>Primary Assists</h3>
+                    <p>
+                      The player's primary assists at 5v5, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons. A primary
+                      assist is the last pass before a goal. Secondary assists (the second last pass before a goal) are not counted.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>PDO (Luck)</h4>
-                      <p>The skater's on-ice shooting percentage plus on-ice save percentage at 5v5 (luck/sustainability context, not a skill rating).</p>
+                  <div class="guide-card-note" data-spot-note="14">
+                    <h3>Hits</h3>
+                    <p>The player's hits thrown at 5v5, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons.</p>
                   </div>
+                  <div class="guide-card-note" data-spot-note="15">
+                    <h3>xGoal Share</h3>
+                    <p>
+                      The player's share of 5v5 expected goals (xG), weighted over the past 3 seasons. xG share is calculated as a player's on ice xG for
+                      divided by the sum of on ice xG for and on ice xG against. 50% is even. To see how xG is calculated, check out the
+                      <a href="/methodologies#xg-model">methodologies page</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="16">
+                    <h3>Goal Share</h3>
+                    <p>
+                      The player's share of 5v5 goals, weighted over the past 3 seasons. Goal share is calculated as a player's on ice goals for divided by
+                      the sum of on ice goals for and on ice goals against. 50% is even.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="17">
+                    <h3>Shot Share</h3>
+                    <p>
+                      The player's share of 5v5 shots, weighted over the past 3 seasons. Shot share is calculated as a player's on ice shots for divided by
+                      the sum of on ice shots for and on ice shots against. 50% is even.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="18">
+                    <h3>Shooting %</h3>
+                    <p>
+                      The player's team's shooting percentage (SH%) at 5v5 while the player was on the ice, weighted over the past 3 seasons. Shooting
+                      percentage is calculated as goals divided by shots on goal. A typical player will have a SH% + SV% of about 100 (much higher could mean
+                      lucky and much lower could mean unlucky).
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="19">
+                    <h3>Save %</h3>
+                    <p>
+                      The player's team's goalie save percentage (SV%) at 5v5 while the player was on the ice, weighted over the past 3 seasons. Save
+                      percentage is calculated as saves divided by shots on goal. A typical player will have a SH% + SV% of about 100 (much higher could mean
+                      lucky and much lower could mean unlucky).
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="20">
+                    <h3>5v5 Teammates</h3>
+                    <p>
+                      The player's quality of teammates (QoT), weighted over the past 3 seasons. QoT is calculated as the average even strength WAR of the
+                      player's teammates (offense and defense averaged), weighted by the 5v5 time they shared. To see how WAR is calculated, check out the
+                      <a href="/methodologies#war-model">methodologies page</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="21">
+                    <h3>5v5 Opponents</h3>
+                    <p>
+                      The player's quality of competition (QoC), weighted over the past 3 seasons. QoC is calculated as the average even strength WAR of the
+                      player's opponents (offense and defense averaged), weighted by the 5v5 time they shared. To see how WAR is calculated, check out the
+                      <a href="/methodologies#war-model">methodologies page</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="22">
+                    <h3>5v5 Ice Time</h3>
+                    <p>The player's average ice time per game at 5v5 (in minutes and seconds), weighted over the past 3 seasons.</p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="23">
+                    <h3>5v4 Ice Time</h3>
+                    <p>
+                      The player's average ice time per game at 5v4 (in minutes and seconds), weighted over the past 3 seasons. Players without enough power
+                      play ice time (an average of 45 seconds per game played) do not qualify for a percentile, but still have a value.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="24">
+                    <h3>4v5 Ice Time</h3>
+                    <p>
+                      The player's average ice time per game at 4v5 (in minutes and seconds), weighted over the past 3 seasons. Players without enough penalty
+                      kill ice time (an average of 45 seconds per game played) do not qualify for a percentile, but still have a value.
+                    </p>
+                  </div>
+                </div>
+                <div class="percentile-guide">
+                  <h3>How to Read a Percentile Bar</h3>
+                  <p class="percentile-guide-lead">
+                    Every stat has a name (the text on the left), the player's value (the number on the right), and a percentile bar. The percentile bar
+                    shows how the player ranks among qualified players in the same position group, using the same weighted seasons. The number on the bar is
+                    the percentile, which is the percentage of qualified players that the player ranks higher than. Stats where less is better, such as
+                    goals against, are flipped so a high percentile is always good. A gray bar means the player did not qualify for that stat's percentile
+                    (seen in special team stats).
+                  </p>
+                  <div class="percentile-guide-example">
+                    <img class="percentile-guide-img percentile-guide-img-light" src="{{ url_for('static', filename='assets/cards/skater_percentile_guide_light.webp') }}" alt="An example stat from a card: the stat name and its value above a percentile bar filled up to the percentile" width="528" height="167" loading="lazy">
+                    <img class="percentile-guide-img percentile-guide-img-dark" src="{{ url_for('static', filename='assets/cards/skater_percentile_guide_dark.webp') }}" alt="" aria-hidden="true" width="528" height="167" loading="lazy">
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
- 
-          <div class="glossary-category">
-              <h3>Skater Graph</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Purple Line</h4>
-                      <p>The skater's yearly Total WAR percentile over the past 5 seasons.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Red Line</h4>
-                      <p>The skater's yearly ES Offense WAR percentile over the past 5 seasons.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Blue Line</h4>
-                      <p>The skater's yearly ES Defense WAR percentile over the past 5 seasons.</p>
-                  </div>
+          <div id="goalie-guide" data-card-tab-panel hidden>
+            <div class="guide-card" id="goalie-guide-card" data-guide-card>
+              <div class="guide-card-figure">
+                <div class="guide-card-stage">
+                  <img class="guide-card-img guide-card-img-light" src="{{ url_for('static', filename='assets/cards/goalie_guide_light.webp') }}" alt="Example goalie card guide for Andrei Vasilevskiy" width="2000" height="2500" loading="lazy">
+                  <img class="guide-card-img guide-card-img-dark" src="{{ url_for('static', filename='assets/cards/goalie_guide_dark.webp') }}" alt="" aria-hidden="true" width="2000" height="2500" loading="lazy">
+                  {# Profile #}
+                  <span class="guide-card-box" data-spot-box="1" style="left: 36.38%; top: 7%; width: 27.25%; height: 16.8%;"></span>
+                  {# Season Stats #}
+                  <span class="guide-card-box" data-spot-box="2" style="left: 67.69%; top: 7%; width: 27.25%; height: 16.8%;"></span>
+                  {# Overall WAR #}
+                  <span class="guide-card-box" data-spot-box="3" style="left: 5.44%; top: 28.35%; width: 57.88%; height: 25.05%;"></span>
+                  {# Even Strength #}
+                  <span class="guide-card-box" data-spot-box="4" style="left: 67.12%; top: 25.35%; width: 27.56%; height: 9.35%;"></span>
+                  {# Penalty Kill #}
+                  <span class="guide-card-box" data-spot-box="5" style="left: 67.12%; top: 34.95%; width: 27.56%; height: 9.2%;"></span>
+                  {# Power Play #}
+                  <span class="guide-card-box" data-spot-box="6" style="left: 67.12%; top: 44.5%; width: 27.56%; height: 9%;"></span>
+                  {# Save % #}
+                  <span class="guide-card-box" data-spot-box="7" style="left: 5.44%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+                  {# GSAx #}
+                  <span class="guide-card-box" data-spot-box="8" style="left: 5.44%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+                  {# LD GSAx #}
+                  <span class="guide-card-box" data-spot-box="9" style="left: 5.44%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+                  {# MD GSAx #}
+                  <span class="guide-card-box" data-spot-box="10" style="left: 5.44%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+                  {# HD GSAx #}
+                  <span class="guide-card-box" data-spot-box="11" style="left: 5.44%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+                  {# Goals Against #}
+                  <span class="guide-card-box" data-spot-box="12" style="left: 37.31%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+                  {# xGoals Against #}
+                  <span class="guide-card-box" data-spot-box="13" style="left: 37.31%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+                  {# LD Shots Against #}
+                  <span class="guide-card-box" data-spot-box="14" style="left: 37.31%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+                  {# MD Shots Against #}
+                  <span class="guide-card-box" data-spot-box="15" style="left: 37.31%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+                  {# HD Shots Against #}
+                  <span class="guide-card-box" data-spot-box="16" style="left: 37.31%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+                  {# Game Start % #}
+                  <span class="guide-card-box" data-spot-box="17" style="left: 69.19%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
+                  {# Excellent Start % #}
+                  <span class="guide-card-box" data-spot-box="18" style="left: 69.19%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
+                  {# Quality Start % #}
+                  <span class="guide-card-box" data-spot-box="19" style="left: 69.19%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
+                  {# Bad Start % #}
+                  <span class="guide-card-box" data-spot-box="20" style="left: 69.19%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
+                  {# Awful Start % #}
+                  <span class="guide-card-box" data-spot-box="21" style="left: 69.19%; top: 84.55%; width: 25.69%; height: 5.95%;"></span>
+                </div>
               </div>
-          </div>
- 
-          </div>
- 
-          <div id="goalie-explanation">
- 
-          <div class="glossary-category">
-              <h3>Goalie Information and Stats</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Position</h4>
-                      <p>The goalie's position and their handedness.</p>
+              <div class="guide-card-side">
+                <div class="guide-card-panel" aria-live="polite">
+                  <div class="guide-card-note" data-spot-note="0">
+                    <h3>Learn More About Each Section</h3>
+                    <p>Hover over or click/tap any part of the card to see what it means.</p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Role</h4>
-                      <p>The goalie's role on their team based on games played.</p>
+                  <div class="guide-card-note" data-spot-note="1">
+                    <h3>Profile</h3>
+                    <p>
+                      Information about who the goalie is. The position they play and their catching hand, their age (on September 1 of the given season's
+                      first year) and their birthday, their height (in feet and inches) and weight (in pounds), their draft position and year (or Undrafted),
+                      and birth country.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Age</h4>
-                      <p>The goalie's age as of September 1 of the selected season and their date of birth.</p>
+                  <div class="guide-card-note" data-spot-note="2">
+                    <h3>Season Stats</h3>
+                    <p>
+                      The goalie's stats from the given season only, in all situations (not weighted). Their games played (GP), record (wins-losses-overtime/shootout
+                      losses), save percentage (SV%), goals saved above expected (GSAx), and wins above replacement (WAR). These are different
+                      from the weighted numbers below.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Size</h4>
-                      <p>The goalie's height (in feet and inches) and weight (in pounds).</p>
+                  <div class="guide-card-note" data-spot-note="3">
+                    <h3>Overall WAR</h3>
+                    <p>
+                      The goalie's total wins above replacement (WAR), for all situations, rated per 60 games and weighted over the past 3 seasons. It is the
+                      sum of the three components on the right. The graph below is the overall WAR percentile in each of the last five seasons, using that
+                      season alone (not weighted), with the logos showing the team(s) the goalie played for. A season without a dot means the goalie did not
+                      qualify. To see how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Games</h4>
-                      <p>The goalie's number of games played.</p>
+                  <div class="guide-card-note" data-spot-note="4">
+                    <h3>Even Strength</h3>
+                    <p>
+                      The goalie's even strength (5v5, 4v4, and 3v3) WAR, rated per 60 games and weighted over the past 3 seasons. It's the goals the goalie
+                      saved compared with what a replacement-level goalie would be expected to save facing the same shots. The small graph under it is the
+                      goalie's Even Strength WAR percentile in each of the last five seasons (with the same y-axis grid lines as Overall WAR). To see how GSAx
+                      and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>W-L-OTL</h4>
-                      <p>The goalie's wins, losses, and overtime losses.</p>
+                  <div class="guide-card-note" data-spot-note="5">
+                    <h3>Penalty Kill</h3>
+                    <p>
+                      The goalie's penalty kill (4v5, 3v5, 3v4, etc.) WAR, rated per 60 games and weighted over the past 3 seasons. It's the goals the goalie
+                      saved while their team was short-handed compared with what a replacement-level goalie would be expected to save facing the same shots.
+                      The small graph under it is the goalie's Penalty Kill WAR percentile in each of the last five seasons (with the same y-axis grid lines
+                      as Overall WAR). To see how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>Save %</h4>
-                      <p>The goalie's save percentage (the percentage of shots on goal that they save).</p>
+                  <div class="guide-card-note" data-spot-note="6">
+                    <h3>Power Play</h3>
+                    <p>
+                      The goalie's power play (5v4, 5v3, 4v3, etc.) WAR, rated per 60 games and weighted over the past 3 seasons. It's the goals the goalie
+                      saved while their team had the man advantage compared with what a replacement-level goalie would be expected to save facing the same
+                      shots. The small graph under it is the goalie's Power Play WAR percentile in each of the last five seasons (with the same y-axis grid
+                      lines as Overall WAR). To see how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
+                    </p>
                   </div>
-                  <div class="glossary-term">
-                      <h4>GSAx</h4>
-                      <p>The goalie's goals saved above expected (how many more goals they prevented compared to an average goalie facing the same shots).</p>
+                  <div class="guide-card-note" data-spot-note="7">
+                    <h3>Save %</h3>
+                    <p>
+                      The goalie's save percentage (SV%) at 5v5, weighted over the past 3 seasons. Save percentage is calculated as saves divided by shots on
+                      goal.
+                    </p>
                   </div>
+                  <div class="guide-card-note" data-spot-note="8">
+                    <h3>GSAx</h3>
+                    <p>
+                      The goalie's goals saved above expected (GSAx) at 5v5, rated per 60 games and weighted over the past 3 seasons. GSAx is calculated as
+                      expected goals (xG) minus actual goals. Positive means they saved more than expected. To see how xG is calculated, check out the
+                      <a href="/methodologies#xg-model">methodologies page</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="9">
+                    <h3>LD GSAx</h3>
+                    <p>
+                      The goalie's goals saved above expected (GSAx) on low danger shots at 5v5, rated per 60 games and weighted over the past 3 seasons. To
+                      see how xG is calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>. To see the low danger zone, check out
+                      the <a href="/methodologies#term-shot-danger-zones">glossary</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="10">
+                    <h3>MD GSAx</h3>
+                    <p>
+                      The goalie's goals saved above expected (GSAx) on medium danger shots at 5v5, rated per 60 games and weighted over the past 3 seasons.
+                      To see how xG is calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>. To see the medium danger zone,
+                      check out the <a href="/methodologies#term-shot-danger-zones">glossary</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="11">
+                    <h3>HD GSAx</h3>
+                    <p>
+                      The goalie's goals saved above expected (GSAx) on high danger shots at 5v5, rated per 60 games and weighted over the past 3 seasons. To
+                      see how xG is calculated, check out the <a href="/methodologies#xg-model">methodologies page</a>. To see the high danger zone, check out
+                      the <a href="/methodologies#term-shot-danger-zones">glossary</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="12">
+                    <h3>Goals Against</h3>
+                    <p>The goalie's goals allowed at 5v5, rated per 60 games and weighted over the past 3 seasons.</p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="13">
+                    <h3>xGoals Against</h3>
+                    <p>
+                      The goalie's expected goals against (xGA) at 5v5, rated per 60 games and weighted over the past 3 seasons. It's the total chance of
+                      scoring on the shots the goalie faced, measuring the quality of the shots they faced. To see how xG is calculated, check out the
+                      <a href="/methodologies#xg-model">methodologies page</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="14">
+                    <h3>LD Shots Against</h3>
+                    <p>
+                      The goalie's low danger shots on goal faced at 5v5, rated per 60 games and weighted over the past 3 seasons. To see the low danger zone,
+                      check out the <a href="/methodologies#term-shot-danger-zones">glossary</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="15">
+                    <h3>MD Shots Against</h3>
+                    <p>
+                      The goalie's medium danger shots on goal faced at 5v5, rated per 60 games and weighted over the past 3 seasons. To see the medium danger
+                      zone, check out the <a href="/methodologies#term-shot-danger-zones">glossary</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="16">
+                    <h3>HD Shots Against</h3>
+                    <p>
+                      The goalie's high danger shots on goal faced at 5v5, rated per 60 games and weighted over the past 3 seasons. To see the high danger
+                      zone, check out the <a href="/methodologies#term-shot-danger-zones">glossary</a>.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="17">
+                    <h3>Game Start %</h3>
+                    <p>The percentage of the team's games the goalie started, weighted over the past 3 seasons.</p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="18">
+                    <h3>Excellent Start %</h3>
+                    <p>
+                      The percentage of the goalie's starts with at least 1.5 goals saved above expected (GSAx), weighted over the past 3 seasons.
+                    </p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="19">
+                    <h3>Quality Start %</h3>
+                    <p>The percentage of the goalie's starts with at least 0 goals saved above expected (GSAx), weighted over the past 3 seasons.</p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="20">
+                    <h3>Bad Start %</h3>
+                    <p>The percentage of the goalie's starts with below 0 goals saved above expected (GSAx), weighted over the past 3 seasons.</p>
+                  </div>
+                  <div class="guide-card-note" data-spot-note="21">
+                    <h3>Awful Start %</h3>
+                    <p>
+                      The percentage of the goalie's starts with equal to or below -1.5 goals saved above expected (GSAx), weighted over the past 3 seasons.
+                    </p>
+                  </div>
+                </div>
+                <div class="percentile-guide">
+                  <h3>How to Read a Percentile Bar</h3>
+                  <p class="percentile-guide-lead">
+                    Every stat has a name (the text on the left), the goalie's value (the number on the right), and a percentile bar. The percentile bar
+                    shows how the goalie ranks among qualified goalies, using the same weighted seasons. The number on the bar is the percentile, which is
+                    the percentage of qualified goalies that the goalie ranks higher than. Stats where less is better, such as goals against, are flipped so
+                    a high percentile is always good.
+                  </p>
+                  <div class="percentile-guide-example">
+                    <img class="percentile-guide-img percentile-guide-img-light" src="{{ url_for('static', filename='assets/cards/goalie_percentile_guide_light.webp') }}" alt="An example stat from a card: the stat name and its value above a percentile bar filled up to the percentile" width="528" height="167" loading="lazy">
+                    <img class="percentile-guide-img percentile-guide-img-dark" src="{{ url_for('static', filename='assets/cards/goalie_percentile_guide_dark.webp') }}" alt="" aria-hidden="true" width="528" height="167" loading="lazy">
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
- 
-          <div class="glossary-category">
-              <h3>Goalie Rankings</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Total WAR</h4>
-                      <p>The goalie's total WAR, built from GSAx measured against a replacement-level goalie across even strength, penalty kill, and power play (power play isn't shown on the card), adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Even Strength</h4>
-                      <p>The goalie's even strength WAR, pooling 5v5 with 4v4 and 3v3 play, built from GSAx measured against a replacement-level goalie, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Penalty Kill</h4>
-                      <p>The goalie's penalty kill WAR (while their team is shorthanded), pooling 4v5, 3v5, and 3v4 play, built from GSAx measured against a replacement-level goalie, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Low Danger</h4>
-                      <p>The goalie's goals saved above expected on low-danger shots, adjusted to a per game rate. Danger zones are defined by shot location.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Medium Danger</h4>
-                      <p>The goalie's goals saved above expected on medium-danger shots, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>High Danger</h4>
-                      <p>The goalie's goals saved above expected on high-danger shots, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Rebounds</h4>
-                      <p>The goalie's performance at limiting the danger (measured in xG) of rebound shots faced, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Team Defense</h4>
-                      <p>The quality of shots (measured in xG) a goalie faces at 5v5 in front of their own team's defense, adjusted to a per game rate (deployment context, not a skill rating).</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Great Starts</h4>
-                      <p>The goalie's frequency of starts with a GSAx at or above +1.5, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Quality Starts</h4>
-                      <p>The goalie's frequency of starts with a GSAx at or above 0.0, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Bad Starts</h4>
-                      <p>The goalie's frequency of starts with a GSAx below 0.0, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Awful Starts</h4>
-                      <p>The goalie's frequency of starts with a GSAx at or below -1.5, adjusted to a per game rate.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Workload</h4>
-                      <p>The goalie's games played plus total hours of time on ice (deployment context, not a skill rating).</p>
-                  </div>
-              </div>
-          </div>
- 
-          <div class="glossary-category">
-              <h3>Goalie Graph</h3>
-              <div class="glossary-grid">
-                  <div class="glossary-term">
-                      <h4>Purple Line</h4>
-                      <p>The goalie's yearly Total WAR percentile over the past 5 seasons.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Red Line</h4>
-                      <p>The goalie's yearly Even Strength WAR percentile over the past 5 seasons.</p>
-                  </div>
-                  <div class="glossary-term">
-                      <h4>Blue Line</h4>
-                      <p>The goalie's yearly Penalty Kill WAR percentile over the past 5 seasons.</p>
-                  </div>
-              </div>
-          </div>
- 
-          </div>
+        </div>
       </div>
     </details>
   </div>
+  <script src="{{ url_for('static', filename='js/guide_card.js') }}" defer></script>

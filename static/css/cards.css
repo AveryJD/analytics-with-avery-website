@@ -229,3 +229,194 @@
 
   .card-preview img:nth-child(4):hover { --x: 11cqw; --y: 0.35cqw; --r: 5deg; }
 }
+
+
+/* ============================================================================
+   GUIDE CARDS
+   ============================================================================ */
+
+.guide-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.guide-card-stage {
+  position: relative;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: var(--main-radius);
+  box-shadow: var(--preview-shadow);
+}
+
+.guide-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.guide-card-img-dark,
+html.dark-mode .guide-card-img-light {
+  display: none;
+}
+
+html.dark-mode .guide-card-img-dark {
+  display: block;
+}
+
+.guide-card-box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1.5px solid rgba(210, 110, 210, 0.4);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.guide-card-box.active {
+  border-color: var(--primary-purple);
+  background-color: rgba(210, 110, 210, 0.14);
+}
+
+.guide-card-note {
+  padding: 1rem 1.25rem;
+  border: var(--border);
+  border-radius: var(--main-radius);
+  background: var(--bg-card);
+}
+
+.guide-card-note + .guide-card-note {
+  margin-top: 0.75rem;
+}
+
+.guide-card .guide-card-note h3 {
+  margin: 0 0 0.5rem;
+}
+
+.guide-card-note p {
+  margin: 0;
+}
+
+.guide-card-ready .guide-card-panel {
+  display: grid;
+}
+
+.guide-card-ready .guide-card-note {
+  grid-area: 1 / 1;
+  margin-top: 0;
+}
+
+.guide-card-ready .guide-card-note[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+.guide-card-side > .percentile-guide {
+  margin-top: 0.75rem;
+}
+
+.guide-card-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.guide-card-tab-stack {
+  display: grid;
+}
+
+.guide-card-tab-stack > [data-card-tab-panel] {
+  grid-area: 1 / 1;
+}
+
+.guide-card-tab-stack > [data-card-tab-panel][hidden] {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.guide-card-tab {
+  padding: 0.5rem 1rem;
+  border: var(--border);
+  border-radius: var(--button-radius);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font: inherit;
+  cursor: pointer;
+}
+
+.guide-card-tab[aria-selected="true"] {
+  background: var(--button-bg);
+  border-color: var(--button-bg);
+  color: #fff;
+}
+
+@media (max-width: 52rem) {
+  .guide-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .guide-card-side {
+    display: contents;
+  }
+
+  .guide-card-panel {
+    order: 1;
+  }
+
+  .guide-card-figure {
+    order: 2;
+  }
+
+  .guide-card-side > .percentile-guide {
+    order: 3;
+    margin-top: 0;
+  }
+}
+
+
+/* ============================================================================
+   PERCENTILE BAR GUIDE
+   ============================================================================ */
+
+.percentile-guide {
+  padding: 1rem 1.25rem;
+  border: var(--border);
+  border-radius: var(--main-radius);
+  background: var(--bg-card);
+  text-align: left;
+}
+
+.guide-card-side .percentile-guide h3 {
+  margin: 0 0 0.5rem;
+}
+
+.percentile-guide-lead {
+  margin: 0 0 1rem;
+}
+
+.percentile-guide-example {
+  position: relative;
+  max-width: 20rem;
+  margin: 0 auto;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: var(--main-radius);
+  box-shadow: var(--preview-shadow);
+}
+
+.percentile-guide-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.percentile-guide-img-dark,
+html.dark-mode .percentile-guide-img-light {
+  display: none;
+}
+
+html.dark-mode .percentile-guide-img-dark {
+  display: block;
+}
