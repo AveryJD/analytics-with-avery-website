@@ -367,11 +367,11 @@ html.dark-mode .guide-card-img-dark {
     display: contents;
   }
 
-  .guide-card-panel {
+  .guide-card-figure {
     order: 1;
   }
 
-  .guide-card-figure {
+  .guide-card-panel {
     order: 2;
   }
 
