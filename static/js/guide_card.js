@@ -58,3 +58,20 @@ document.querySelectorAll('.guide-card-tab-stack').forEach((stack) => {
   document.querySelectorAll('details').forEach((details) => details.addEventListener('toggle', equalize));
   if (document.fonts) document.fonts.ready.then(equalize);
 });
+
+// The guide images are lazy and sit in a closed <details>, so the browser would not fetch them until the guide is opened. Once the page has loaded,
+// fetch the ones for the current light or dark style (and again if the style is switched) so the guide shows instantly when opened
+function preloadGuideImages() {
+  document.querySelectorAll('.guide-card-img, .percentile-guide-img').forEach((img) => {
+    if (getComputedStyle(img).display !== 'none') img.loading = 'eager';
+  });
+}
+
+function schedulePreload() {
+  if ('requestIdleCallback' in window) requestIdleCallback(preloadGuideImages);
+  else setTimeout(preloadGuideImages, 200);
+}
+
+if (document.readyState === 'complete') schedulePreload();
+else window.addEventListener('load', schedulePreload);
+new MutationObserver(schedulePreload).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
