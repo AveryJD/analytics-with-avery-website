@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, send_from_directory, Response, url_for, abort, jsonify
+from flask import Flask, render_template, request, send_file, send_from_directory, Response, url_for, abort, jsonify, redirect
 import click
 import csv
 import hashlib
@@ -16,7 +16,7 @@ from PIL import Image
 # The player card project reads its card data, fonts, and team logos from this site's data folder
 os.environ.setdefault('NHL_CARD_DATA_DIR', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
 
-from blog import POSTS, POSTS_BY_URL
+from blog import POSTS, POSTS_BY_URL, POST_IMAGES_FOLDER
 from database.player_card_database import get_player_card_db, delete_player_card_tables, create_player_card_tables, import_player_card_data
 from database.team_card_database import get_team_card_db, delete_team_card_tables, create_team_card_tables, import_team_card_data
 
@@ -210,6 +210,24 @@ def home():
 @app.route('/robots.txt')
 def robots():
     return send_from_directory(BASE_DIR, 'robots.txt', mimetype='text/plain', max_age=24 * 60 * 60)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(BASE_DIR, 'static', 'assets', 'brand'), 'favicon.ico',
+                               mimetype='image/x-icon', max_age=24 * 60 * 60)
+
+
+@app.route('/post_images/<path:filename>')
+def post_image(filename):
+    """Blog post images, which are kept with the posts in content/post_images/ (cached like the static files)."""
+    return send_from_directory(POST_IMAGES_FOLDER, filename)
+
+
+@app.route('/static/post_images/<path:filename>')
+def old_post_image(filename):
+    """Post images used to be served from /static/post_images/; keep links to them (and shared post previews) working."""
+    return redirect(url_for('post_image', filename=filename), code=301)
 
 
 @app.route('/sitemap.xml')

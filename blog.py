@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 POSTS_FOLDER = os.path.join(BASE_DIR, 'content', 'posts')
+POST_IMAGES_FOLDER = os.path.join(BASE_DIR, 'content', 'post_images')   # served at /post_images/ (see the route in app.py)
 
 SITE_URL = 'https://analyticswithavery.com'
 DEFAULT_IMAGE = '/static/assets/brand/logo_square_dark.svg'
@@ -39,10 +40,10 @@ def first_image(soup):
 
 
 def thumbnail_for(post_id, image):
-    """The post's own blog list thumbnail, static/post_images/thumbs/<id>.webp (e.g. 001.webp), or its first image if it has none."""
+    """The post's own blog list thumbnail, content/post_images/thumbs/<id>.webp (e.g. 001.webp), or its first image if it has none."""
     thumb = f'{post_id:03d}.webp'
-    if os.path.exists(os.path.join(BASE_DIR, 'static', 'post_images', 'thumbs', thumb)):
-        return '/static/post_images/thumbs/' + thumb
+    if os.path.exists(os.path.join(POST_IMAGES_FOLDER, 'thumbs', thumb)):
+        return '/post_images/thumbs/' + thumb
     return image
 
 
