@@ -45,7 +45,7 @@
                   <span class="guide-card-box" data-spot-box="15" style="left: 37.31%; top: 59.15%; width: 25.69%; height: 5.95%;"></span>
                   {# Goal Share #}
                   <span class="guide-card-box" data-spot-box="16" style="left: 37.31%; top: 65.5%; width: 25.69%; height: 5.95%;"></span>
-                  {# Shot Share #}
+                  {# Corsi Share #}
                   <span class="guide-card-box" data-spot-box="17" style="left: 37.31%; top: 71.85%; width: 25.69%; height: 5.95%;"></span>
                   {# Shooting % #}
                   <span class="guide-card-box" data-spot-box="18" style="left: 37.31%; top: 78.2%; width: 25.69%; height: 5.95%;"></span>
@@ -141,7 +141,7 @@
                     <h3>Finishing</h3>
                     <p>
                       The player's finishing WAR, for all situations, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons.
-                      It's the player's goals scored above their expected goals (xG) on their own shots, compared with a replacement-level shooter. The small
+                      It's the player's goals scored above their expected goals (xG) on their own shots, compared with a replacement-level shooter, then shrunk by how many shots they have taken. The small
                       graph under it is the player's Finishing WAR percentile in each of the last five seasons (with the same y-axis grid lines as Overall
                       WAR). To see how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
                     </p>
@@ -150,7 +150,7 @@
                     <h3>Penalties</h3>
                     <p>
                       The player's penalties WAR, for all situations, rated per 82 games (or 84 from 2026-2027 onwards) and weighted over the past 3 seasons.
-                      It's the net penalty minutes the player drew versus took, valued by the expected goals those penalties are worth. The small graph under
+                      It's the net penalty minutes the player drew versus took, valued by the expected goals those penalties are worth, compared with a replacement-level player and shrunk by the player's ice time. The small graph under
                       it is the player's Penalties WAR percentile in each of the last five seasons (with the same y-axis grid lines as Overall WAR). To see
                       how xG and WAR are calculated, check out the <a href="/methodologies">methodologies page</a>.
                     </p>
@@ -201,10 +201,11 @@
                     </p>
                   </div>
                   <div class="guide-card-note" data-spot-note="17">
-                    <h3>Shot Share</h3>
+                    <h3>Corsi Share</h3>
                     <p>
-                      The player's share of 5v5 shots, weighted over the past 3 seasons. Shot share is calculated as a player's on ice shots for divided by
-                      the sum of on ice shots for and on ice shots against. 50% is even.
+                      The player's share of 5v5 shot attempts (shots on goal, missed shots, and blocked shots), weighted over the past 3 seasons. Corsi share
+                      is calculated as a player's on ice shot attempts for divided by the sum of on ice shot attempts for and on ice shot attempts against.
+                      50% is even.
                     </p>
                   </div>
                   <div class="guide-card-note" data-spot-note="18">

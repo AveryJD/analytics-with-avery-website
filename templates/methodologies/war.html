@@ -79,9 +79,9 @@
       </p>
       <p>
         WAR here is a season total in wins. Among skaters who played at least half a season (leaving out the three shortened seasons), the
-        median is about 0.4 WAR, the top quarter are above 1.2, the top 10% are above 2.2, and the best skater each season lands between about
-        4.6 and 9.3. Goalies are more spread out: among goalies with at least a quarter of a season, the median is about 0.9 and the top 10%
-        are above 4.5.
+        median is about 0.4 WAR, the top quarter are above 0.9, the top 10% are above 1.6, and the best skater in each full season lands between about
+        3.1 and 7.0. Goalies are more spread out: among goalies with at least a quarter of a season, the median is about 0.6 and the top 10%
+        are above 2.9.
       </p>
 
       <h3>Replacement Level</h3>
@@ -109,11 +109,23 @@
       <p>
         Finishing is a player's actual goals minus the xG of their own shots (goals above expected), then taken above replacement. A
         replacement-level shooter isn't an average shooter: in every season, replacement-level forwards scored only about 74% to 88% of their
-        xG at 5v5 while regular forwards scored close to all of it. So the baseline is the rate depth players actually shoot at, and a
-        regular's finishing WAR is their goals above expected minus what a replacement-level shooter would have scored on the same number of
-        shots, converted to wins. Whether that gap is real finishing talent or shot quality the xG model can't see (passes and screens) can't
+        xG at 5v5 while regular forwards scored close to all of it. But part of that gap is only that the xG model can't see who is shooting, so
+        finishing WAR credits only the part of it that is a stable trait: the fraction of depth players' finishing gap that shows up again in the same
+        players the next season, which I fit from the data at about 61% for forwards and 37% for defensemen. A regular's finishing WAR is their goals above
+        expected minus that share of what a replacement-level shooter would have missed by on the same number of shots, converted to wins. The rest of the
+        gap is noise or one-season circumstance that doesn't come back, so it isn't held against regulars, and it stops finishing WAR from mostly rewarding
+        shot volume. Whether the stable part is real finishing talent or shot quality the xG model can't see (passes and screens) can't
         be separated with public data. This is the finishing piece of a goals-above-replacement measure: because depth players really do shoot
-        worse than xG, an average finisher is worth more than zero above replacement.
+        worse than xG, an average finisher is worth a little more than zero above replacement.
+      </p>
+      <p>
+        Most of a player's finishing in one season is luck, so it is shrunk before it counts. Finishing per shot repeats from one year to the next with a
+        correlation of only about 0.21, and I estimate that roughly 85% of the differences between players' finishing rates (for players with at least 100
+        shots) is chance rather than talent. A player keeps a fraction of his finishing gap above or below replacement equal to shots / (shots + 1,075),
+        where 1,075 is fit from the data and the shots counted are the player's own in that season and the two seasons before it, so a player with a long
+        record is trusted more than one with a single short season. A player with 150 shots over those three seasons keeps about 12% of it, one with 300 shots
+        about 22%, and one with 500 shots about 32%. This puts finishing on a footing similar to the RAPM ratings, which are also shrunk toward their prior,
+        and keeps it from making up most of the differences between players' WAR: finishing accounts for about 32% of the spread in total WAR across all seasons, against about 34% for 5v5 offense.
       </p>
       <p>
         Finishing is measured separately by the strength the shooter's team was at: 5v5, 5v4, 4v5, and three groups of rarer states, "Other
@@ -133,6 +145,13 @@
         Other even strength (4v4 and 3v3), Other power play (5v3 and 4v3), and Other penalty kill (3v5 and 3v4). The rarer groups are too small
         to fit their own value per minute, so each uses the value of the nearest main state: Other even strength uses the 5v5 value, Other
         power play uses 5v4, and Other penalty kill uses 4v5.
+      </p>
+      <p>
+        Penalties are also shrunk, though much less than finishing, since drawing and taking penalties is far more repeatable: the same player's
+        penalty impact per hour of ice time correlates about 0.55 from one year to the next. A player keeps a fraction of his penalty gap from replacement
+        equal to hours / (hours + 16), where hours is his ice time over that season and the two before it and 16 is fit from the data. A player with 15 hours
+        of ice time keeps about 48% of it, one with 30 hours about 65%, and one with 60 hours about 79%, so the shrinkage mostly affects players with very
+        little ice time.
       </p>
       <p class="table-intro">Only penalties that are an individual player's doing count:</p>
       <div class="table-scroll">
@@ -160,13 +179,22 @@
         the starter) and converted to wins the same way as skaters. Short misses (explained in the <a href="#xg-model">xG section</a>) aren't
         in the shot data, so goalies get no credit for them.
       </p>
+      <p>
+        Goalie results are mostly luck too, so they are shrunk the same way finishing is. A goalie's result per shot (goals against minus xG against, per
+        shot faced) correlates only about 0.13 from one year to the next, and I estimate that roughly 81% of the differences between goalies' results (for
+        goalies who faced at least 300 shots) is chance rather than talent. A goalie keeps a fraction of his gap from the league-average goalie equal to
+        shots / (shots + 4,270), where 4,270 is fit from the data and the shots counted are those he faced in that season and the two seasons before it. A goalie
+        with 1,000 shots over those three seasons keeps about 19% of it, one with 3,000 shots about 41%, and one with 4,500 shots (a full-time starter) about
+        51%. Only the goalie's own gap is shrunk: the backups' replacement level is taken off in full.
+      </p>
 
       <h3>Limitations and Things to Keep in Mind</h3>
       <ul class="model-list">
-        <li>Scorers rate a bit above playmakers. xG can't see passing or screens (see the <a href="#xg-model">xG limitations</a>), so the shooter who finishes a chance is credited with beating xG while the passer is credited only through on-ice ratings.</li>
+        <li>Scorers rate a bit above playmakers. xG can't see passing or screens (see the <a href="#xg-model">xG limitations</a>), so the shooter who finishes a chance is credited with beating xG while the passer is credited only through on-ice ratings. Finishing is shrunk heavily, so this effect is small.</li>
+        <li>Players with few shots or little ice time get less finishing and penalty credit, and goalies with few shots faced get less of their save results. Because all three are shrunk, a player with a small sample, such as a rookie, early in a season or after an injury, has much of his finishing gap, and some of his penalty gap, good or bad, left out of his WAR until he has played more.</li>
         <li>Goalie WAR depends on an xG model that doesn't know who is shooting. The xG model only knows which hand the shooter shoots with, so a goalie who faces more dangerous shooters than average, or whose team gives up more screens and passes than the model can see, gets credit or blame that isn't theirs.</li>
         <li>WAR is a counting stat. Missed games and shortened seasons lower a player's WAR, so a player who was hurt has fewer chances to add wins.</li>
-        <li>League totals float. Nothing pins league WAR to a fixed number, so it moves with how many players are above replacement and how lucky the goalies and shooters were that year. In a typical season, about 40% of skaters finish below 0 WAR (between 34% and 43% across the 17 seasons), so compare seasons using ranks and percentiles more than raw totals.</li>
+        <li>League totals float. Nothing pins league WAR to a fixed number, so it moves with how many players are above replacement and how lucky the goalies and shooters were that year. About a quarter of skaters (those with at least 200 minutes) finish below 0 WAR, so compare seasons using ranks and percentiles more than raw totals.</li>
         <li>The replacement-level cutoffs are hand-picked. Moving them shifts every player's WAR.</li>
         <li>Penalties are all valued as a full power play. That is a simplification, since a minor ends early when the power play scores and overlapping penalties don't each give a full extra power play.</li>
         <li>Empty-net and other very rare situations aren't included. Play with a goalie pulled, and any state outside the ones listed in the <a href="#rapm-model">RAPM</a> section, counts toward neither RAPM nor WAR, including empty-net goals scored and allowed.</li>
