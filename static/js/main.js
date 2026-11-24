@@ -391,15 +391,15 @@ function setupTeamFilter(suffix) {
 }
 
 const PRELOAD_CARDS = {
-  0: { season: "2025-2026", position: "F", team: "EDM", player: "Connor McDavid" },
-  1: { season: "2025-2026", position: "D", team: "COL", player: "Cale Makar" },
-  2: { season: "2025-2026", position: "D", team: "MIN", player: "Quinn Hughes" }
+  0: { season: "2026-2027", position: "F", team: "EDM", player: "Connor McDavid" },
+  1: { season: "2026-2027", position: "D", team: "COL", player: "Cale Makar" },
+  2: { season: "2026-2027", position: "D", team: "MIN", player: "Quinn Hughes" }
 };
 
 const PRELOAD_TEAM_CARDS = {
-  0: { season: "2025-2026", team: "Carolina Hurricanes" },
-  1: { season: "2025-2026", team: "Toronto Maple Leafs" },
-  2: { season: "2025-2026", team: "Montreal Canadiens" }
+  0: { season: "2026-2027", team: "Carolina Hurricanes" },
+  1: { season: "2026-2027", team: "Toronto Maple Leafs" },
+  2: { season: "2026-2027", team: "Montreal Canadiens" }
 };
 
 // Toggle between the single-card view and the compare-cards view on a
